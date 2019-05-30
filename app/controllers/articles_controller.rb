@@ -1,11 +1,14 @@
 class ArticlesController < ApplicationController
+  before_action :require_login, only: [:new, :create, :edit, :update, :destroy]
   include ArticlesHelper
+
   def index
     @articles = Article.all
     
   end
   def show
     @article = Article.find(params[:id])
+
   end
 
   def new
