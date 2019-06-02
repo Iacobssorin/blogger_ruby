@@ -9260,3 +9260,601 @@ Processing by ArticlesController#show as HTML
 Completed 200 OK in 23ms (Views: 20.4ms | ActiveRecord: 0.5ms)
 
 
+Started GET "/articles" for ::1 at 2019-06-02 19:07:55 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (9.2ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 273ms (Views: 262.9ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:07:58 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.4ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (18.6ms)
+Completed 200 OK in 79ms (Views: 74.2ms | ActiveRecord: 1.2ms)
+
+
+Started DELETE "/articles/1" for ::1 at 2019-06-02 19:08:02 +0200
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"sQK9/ny6TXtjN0wGzHMchxRjJHv9EYUyxwf4j6fJfa6aaGITb1c4Lt3Rj+oMUpXcIiLH4/d3RYjNXZ0auc9ggw==", "id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:26
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[36mArticle Destroy (0.7ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.3ms)
+
+
+  
+ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed: DELETE FROM "articles" WHERE "articles"."id" = ?):
+  
+app/controllers/articles_controller.rb:30:in `destroy'
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:08:26 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (22.2ms)
+  Rendered articles/edit.html.erb within layouts/application (23.5ms)
+Completed 200 OK in 42ms (Views: 39.1ms | ActiveRecord: 0.4ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:08:48 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6zf77gzM5RHa4aQAZS5s+iCvcgsUmpT78dtRJcpBwm4hakSMFz1s8xP/uyEJfkx9dm7jUeA35sjMjR1DnXetpw==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007fdb5d340f40 @tempfile=#<Tempfile:/tmp/RackMultipart20190602-21169-tmbp4d.desktop>, @original_filename="examples.desktop", @content_type="application/x-desktop", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"examples.desktop\"\r\nContent-Type: application/x-desktop\r\n">, "tag_list"=>"this is a new tag"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is a new tag"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+[paperclip] Trying to link /tmp/RackMultipart20190602-21169-tmbp4d.desktop to /tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-1rw4idq.desktop
+[paperclip] Trying to link /tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-1rw4idq.desktop to /tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-i49uug.desktop
+Command :: file -b --mime '/tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-i49uug.desktop'
+[paperclip] Content Type Spoof: Filename examples.desktop (application/x-desktop from Headers, [] from Extension), content type discovered from file command: text/plain. See documentation to allow this combination.
+[paperclip] Trying to link /tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-1rw4idq.desktop to /tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-131fze7.desktop
+Command :: file -b --mime '/tmp/bfebe34154a0dfd9fc7b447fc9ed74e920190602-21169-131fze7.desktop'
+[paperclip] Content Type Spoof: Filename examples.desktop (application/x-desktop from Headers, [] from Extension), content type discovered from file command: text/plain. See documentation to allow this combination.
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 43ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:08:48 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:08:53 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (5.8ms)
+  Rendered articles/edit.html.erb within layouts/application (6.7ms)
+Completed 200 OK in 25ms (Views: 21.6ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:09:02 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"F1I111xSGtPZkVRqZX2MMJeeF4hOhl3WHukeX+7ah0TdD4q1R6OTMRCPS0sJLay3wV+G0rorL+Ujv1I5uezojQ==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "tag_list"=>"this is a new tag"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is a new tag"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:09:02 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 33ms (Views: 18.2ms | ActiveRecord: 0.3ms)
+
+
+Started DELETE "/articles/1" for ::1 at 2019-06-02 19:09:07 +0200
+Processing by ArticlesController#destroy as HTML
+  Parameters: {"authenticity_token"=>"foHNqwHJNascBjuyzJB/wWOBfx6CS2L2+yB6bNCGkB1V6xJGEiRA/qLg+F4MsfaaVcCchogtokzxeh/5zoCNMA==", "id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:26
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[36mArticle Destroy (0.6ms)[0m  [1m[31mDELETE FROM "articles" WHERE "articles"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/articles_controller.rb:30
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:30
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 1.1ms)
+
+
+  
+ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed: DELETE FROM "articles" WHERE "articles"."id" = ?):
+  
+app/controllers/articles_controller.rb:30:in `destroy'
+Started GET "/logout" for ::1 at 2019-06-02 19:11:42 +0200
+Processing by AuthorSessionsController#destroy as HTML
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/author_sessions_controller.rb:16
+Redirected to http://localhost:3000/authors
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/authors" for ::1 at 2019-06-02 19:11:42 +0200
+Processing by AuthorsController#index as HTML
+  Rendering authors/index.html.erb within layouts/application
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT "authors".* FROM "authors"[0m
+  ↳ app/views/authors/index.html.erb:16
+  Rendered authors/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 17ms (Views: 16.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/authors/new" for ::1 at 2019-06-02 19:11:45 +0200
+Processing by AuthorsController#new as HTML
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "authors"[0m
+  ↳ app/controllers/authors_controller.rb:18
+Redirected to http://localhost:3000/
+Filter chain halted as :zero_authors_or_authenticated rendered or redirected
+Completed 302 Found in 3ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for ::1 at 2019-06-02 19:11:45 +0200
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:11:48 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  Rendered articles/show.html.erb within layouts/application (3.9ms)
+Completed 200 OK in 28ms (Views: 25.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for ::1 at 2019-06-02 19:11:50 +0200
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 33ms (Views: 31.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/login" for ::1 at 2019-06-02 19:11:52 +0200
+Processing by AuthorSessionsController#new as HTML
+  Rendering author_sessions/new.html.erb within layouts/application
+  Rendered author_sessions/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 21ms (Views: 19.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/author_sessions" for ::1 at 2019-06-02 19:11:54 +0200
+Processing by AuthorSessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xqWrARdtxU0kbCCzzNRjvCinORqM4Gj+aZOfl43okUHhKIeXmq8TNc/ykP8KDYZP7VGhp13jVYTSU/lwr5KPCQ==", "email"=>"so2so4@yahoo.it", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mAuthor Load (0.3ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."email" = 'so2so4@yahoo.it' ORDER BY "authors"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/author_sessions_controller.rb:7
+Redirected to http://localhost:3000/articles
+Completed 302 Found in 132ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/articles" for ::1 at 2019-06-02 19:11:54 +0200
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (1.4ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 22ms (Views: 20.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:11:55 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (5.3ms)
+Completed 200 OK in 23ms (Views: 20.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:11:58 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (4.1ms)
+  Rendered articles/edit.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 34ms (Views: 30.4ms | ActiveRecord: 0.6ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:12:34 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"aiQ4wMBec9jNj0Yfcj7p2fHXrQzEF5cl9WndvYwR3Mqd84/Z++JZlFZd7rr4SwMUsj6joyjNkNtOlV1silPlUA==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "image"=>#<ActionDispatch::Http::UploadedFile:0x00005640c771dbe0 @tempfile=#<Tempfile:/tmp/RackMultipart20190602-21169-1opiva7.PNG>, @original_filename="foto.PNG", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"foto.PNG\"\r\nContent-Type: image/png\r\n">, "tag_list"=>"this is a new tag"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is a new tag"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.0ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+[paperclip] Trying to link /tmp/RackMultipart20190602-21169-1opiva7.PNG to /tmp/66c9eed121277d8be2df09ce25c4687a20190602-21169-vzs5zz.PNG
+[paperclip] Trying to link /tmp/66c9eed121277d8be2df09ce25c4687a20190602-21169-vzs5zz.PNG to /tmp/66c9eed121277d8be2df09ce25c4687a20190602-21169-8zax5s.PNG
+Command :: file -b --mime '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-21169-8zax5s.PNG'
+Command :: identify -format '%wx%h,%[exif:orientation]' '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-21169-vzs5zz.PNG[0]' 2>/dev/null
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.7ms)
+
+
+  
+Paperclip::Errors::CommandNotFoundError (Could not run the `identify` command. Please install ImageMagick.):
+  
+app/controllers/articles_controller.rb:39:in `update'
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:18:33 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (40.5ms)
+  Rendered articles/edit.html.erb within layouts/application (41.3ms)
+Completed 200 OK in 301ms (Views: 274.3ms | ActiveRecord: 2.0ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:18:35 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/av+Be43gi6H7j2n0X8AZif+iCW7qWBGItvG3Mzqc8b/9SiNGPkddnCfFhX5v/em3ZmjzxKY8BPQhBprIBis7A==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "tag_list"=>"this is a new tag"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is a new tag"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 47ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:18:35 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (2.8ms)
+Completed 200 OK in 21ms (Views: 19.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:18:39 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (5.4ms)
+  Rendered articles/edit.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 27ms (Views: 23.3ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:18:55 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"yZ7sWIdyvzK9iiZMf1etvA3ysGWyctYxr57JjegWt/4+SVtBvM6VfiZYjun1IkdxThu+yl6o0c8UYklc7lSOZA==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "image"=>#<ActionDispatch::Http::UploadedFile:0x00007ff1c51c53b8 @tempfile=#<Tempfile:/tmp/RackMultipart20190602-23610-68optr.PNG>, @original_filename="foto.PNG", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"article[image]\"; filename=\"foto.PNG\"\r\nContent-Type: image/png\r\n">, "tag_list"=>"this is a new tag"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is a new tag"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+[paperclip] Trying to link /tmp/RackMultipart20190602-23610-68optr.PNG to /tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG
+[paperclip] Trying to link /tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG to /tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-5gd442.PNG
+Command :: PATH=/opt/ImageMagick/bin:$PATH; file -b --mime '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-5gd442.PNG'
+Command :: PATH=/opt/ImageMagick/bin:$PATH; identify -format '%wx%h,%[exif:orientation]' '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]' 2>/dev/null
+Command :: PATH=/opt/ImageMagick/bin:$PATH; identify -format %m '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]'
+Command :: PATH=/opt/ImageMagick/bin:$PATH; convert '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]' -auto-orient -resize "300x300>" '/tmp/9796953e8848e43ab89c3f5349f2ad2f20190602-23610-1hlac6h'
+[paperclip] Trying to link /tmp/9796953e8848e43ab89c3f5349f2ad2f20190602-23610-1hlac6h to /tmp/8fa76bb45c780c01611b0274acc8b63d20190602-23610-13ev5u5
+Command :: PATH=/opt/ImageMagick/bin:$PATH; identify -format '%wx%h,%[exif:orientation]' '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]' 2>/dev/null
+Command :: PATH=/opt/ImageMagick/bin:$PATH; identify -format %m '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]'
+Command :: PATH=/opt/ImageMagick/bin:$PATH; convert '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG[0]' -auto-orient -resize "100x100>" '/tmp/9796953e8848e43ab89c3f5349f2ad2f20190602-23610-102m587'
+[paperclip] Trying to link /tmp/9796953e8848e43ab89c3f5349f2ad2f20190602-23610-102m587 to /tmp/4e6865a78af550426b2311b43cdb54c520190602-23610-axl6yn
+[paperclip] Trying to link /tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-l40t9e.PNG to /tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-rtu0r9.PNG
+Command :: PATH=/opt/ImageMagick/bin:$PATH; file -b --mime '/tmp/66c9eed121277d8be2df09ce25c4687a20190602-23610-rtu0r9.PNG'
+  [1m[36mArticle Update (0.4ms)[0m  [1m[33mUPDATE "articles" SET "image_file_name" = ?, "image_content_type" = ?, "image_file_size" = ?, "image_updated_at" = ?, "updated_at" = ? WHERE "articles"."id" = ?[0m  [["image_file_name", "foto.PNG"], ["image_content_type", "image/png"], ["image_file_size", 32381], ["image_updated_at", "2019-06-02 17:18:55.016017"], ["updated_at", "2019-06-02 17:18:55.155404"], ["id", 1]]
+  ↳ app/controllers/articles_controller.rb:39
+[paperclip] deleting /home/sorin/odin/blogger_ruby/public/system/articles/images/000/000/001/original/8933.jpg
+[paperclip] deleting /home/sorin/odin/blogger_ruby/public/system/articles/images/000/000/001/medium/8933.jpg
+[paperclip] deleting /home/sorin/odin/blogger_ruby/public/system/articles/images/000/000/001/thumb/8933.jpg
+  [1m[35m (4.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 164ms (ActiveRecord: 5.2ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:18:55 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 23ms (Views: 21.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:19:05 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (5.0ms)
+Completed 200 OK in 29ms (Views: 26.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for ::1 at 2019-06-02 19:19:09 +0200
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.3ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.3ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 24ms (Views: 21.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:19:11 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 26ms (Views: 24.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles" for ::1 at 2019-06-02 19:19:14 +0200
+Processing by ArticlesController#index as HTML
+  Rendering articles/index.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles"[0m
+  ↳ app/views/articles/index.html.erb:4
+  Rendered articles/index.html.erb within layouts/application (2.4ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 26ms (Views: 24.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/tags/5" for ::1 at 2019-06-02 19:19:21 +0200
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tags_controller.rb:4
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.2ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 5]]
+  ↳ app/views/tags/show.html.erb:4
+  Rendered tags/show.html.erb within layouts/application (3.7ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 22ms (Views: 19.4ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:19:29 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (4.7ms)
+Completed 200 OK in 29ms (Views: 26.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1/edit" for ::1 at 2019-06-02 19:19:34 +0200
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAuthor Load (0.2ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:35
+  Rendering articles/edit.html.erb within layouts/application
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:8
+  Rendered articles/_form.html.erb (6.0ms)
+  Rendered articles/edit.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 31ms (Views: 27.6ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/1" for ::1 at 2019-06-02 19:19:47 +0200
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RjAF15FPY941+fA3PDkpR0UQQk+4YV50UX6HAcqNtRSx57LOqvNJkq4rWJK2TMOKBvlM4FS7WYrqggfQzM+Mjg==", "article"=>{"title"=>"Sample Article Title", "body"=>"This is the text for my article, woo woo! hh", "tag_list"=>"this is my"}, "commit"=>"Update Article", "id"=>"1"}
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ /home/sorin/.rbenv/versions/2.6.3/lib/ruby/gems/2.6.0/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:38
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT ?[0m  [["name", "this is my"], ["LIMIT", 1]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Create (0.3ms)[0m  [1m[32mINSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "this is my"], ["created_at", "2019-06-02 17:19:47.361654"], ["updated_at", "2019-06-02 17:19:47.361654"]]
+  ↳ app/models/article.rb:14
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/models/article.rb:15
+  [1m[36mTagging Destroy (0.2ms)[0m  [1m[31mDELETE FROM "taggings" WHERE "taggings"."article_id" = ? AND "taggings"."tag_id" = ?[0m  [["article_id", 1], ["tag_id", 5]]
+  ↳ app/models/article.rb:15
+  [1m[36mTagging Create (0.1ms)[0m  [1m[32mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 6], ["article_id", 1], ["created_at", "2019-06-02 17:19:47.378073"], ["updated_at", "2019-06-02 17:19:47.378073"]]
+  ↳ app/models/article.rb:15
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/articles_controller.rb:39
+Redirected to http://localhost:3000/articles/1
+Completed 302 Found in 28ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:19:47 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 45ms (Views: 43.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:19:56 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 22ms (Views: 19.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/tags/5" for ::1 at 2019-06-02 19:19:56 +0200
+Processing by TagsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mTag Load (0.2ms)[0m  [1m[34mSELECT  "tags".* FROM "tags" WHERE "tags"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/tags_controller.rb:4
+  Rendering tags/show.html.erb within layouts/application
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 5]]
+  ↳ app/views/tags/show.html.erb:4
+  Rendered tags/show.html.erb within layouts/application (1.6ms)
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/layouts/application.html.erb:18
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/articles/1" for ::1 at 2019-06-02 19:20:03 +0200
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mArticle Load (0.1ms)[0m  [1m[34mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/articles_controller.rb:10
+  Rendering articles/show.html.erb within layouts/application
+  [1m[36mTag Load (0.1ms)[0m  [1m[34mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 1]]
+  ↳ app/views/articles/show.html.erb:4
+  [1m[36mAuthor Load (0.1ms)[0m  [1m[34mSELECT  "authors".* FROM "authors" WHERE "authors"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/articles/show.html.erb:19
+  Rendered articles/show.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 20ms (Views: 18.2ms | ActiveRecord: 0.3ms)
+
+
